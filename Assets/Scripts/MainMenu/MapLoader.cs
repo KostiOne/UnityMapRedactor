@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MapLoader : MonoBehaviour
 {
-    [SerializeField] private Transform parentTransform; // Родительский объект для созданных объектов
-    [SerializeField] private TMP_Text mapNameText;      // Текстовое поле для отображения имени карты
+    [SerializeField] private Transform parentTransform; 
+    [SerializeField] private TMP_Text mapNameText;    
 
     private string currentMapName;
     private string filePath;
@@ -30,15 +30,15 @@ public class MapLoader : MonoBehaviour
             return;
         }
 
-        // Загружаем данные карты
+
         string json = File.ReadAllText(filePath);
         levelData = JsonUtility.FromJson<LevelData>(json);
 
-        // Отображаем имя карты на UI
+ 
         if (mapNameText != null)
             mapNameText.text = $"Plaing: {levelData.levelName}";
 
-        // Создаем объекты на основе данных
+
         LoadObjects();
     }
 
@@ -46,14 +46,14 @@ public class MapLoader : MonoBehaviour
     {
         foreach (ObjectData data in levelData.objectDataList)
         {
-            // Загружаем префаб из папки Resources/ActionPrefabs
+    
             GameObject prefab = Resources.Load<GameObject>($"ActionPrefabs/{data.prefabName}");
 
             if (prefab != null)
             {
-                // Если объект найден, создаём его
+               
                 GameObject obj = Instantiate(prefab, data.position, Quaternion.Euler(data.rotation), parentTransform);
-                obj.transform.localScale = data.scale; // Восстанавливаем масштаб
+                obj.transform.localScale = data.scale;
             }
             else
             {

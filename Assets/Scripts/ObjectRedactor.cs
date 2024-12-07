@@ -5,18 +5,18 @@ using UnityEngine.UI;
 
 public class ObjectRedactor : MonoBehaviour
 {
-    [SerializeField] private Slider rotationSlider; // Слайдер для вращения
-    [SerializeField] private Slider scaleSlider;    // Слайдер для масштаба
-    [SerializeField] private Button deletePrefabButton; // Кнопка для удаления объекта
+    [SerializeField] private Slider rotationSlider;
+    [SerializeField] private Slider scaleSlider;  
+    [SerializeField] private Button deletePrefabButton; 
 
     private GameObject _object;
 
-    [SerializeField] private float rotationMultiplier = 5f; // Ускорение вращения
-    [SerializeField] private float scaleMultiplier = 1f;    // Масштабирование
+    [SerializeField] private float rotationMultiplier = 5f;
+    [SerializeField] private float scaleMultiplier = 1f;  
 
     private void Start()
     {
-        // Привязываем события
+
         deletePrefabButton.onClick.AddListener(DeletePrefab);
         rotationSlider.onValueChanged.AddListener(RotateObject);
         scaleSlider.onValueChanged.AddListener(ScaleObject);
@@ -26,7 +26,7 @@ public class ObjectRedactor : MonoBehaviour
     {
         _object = objectToRedact;
 
-        // Инициализация значений слайдеров
+
         rotationSlider.value = _object.transform.eulerAngles.y;
         scaleSlider.value = _object.transform.localScale.x;
 
@@ -57,7 +57,7 @@ public class ObjectRedactor : MonoBehaviour
     {
         if (_object != null)
         {
-            // Сохраняем текущий угол по X и Z, изменяем только угол по Y
+
             Vector3 currentRotation = _object.transform.eulerAngles;
             currentRotation.y = value * rotationMultiplier;
             _object.transform.eulerAngles = currentRotation;
@@ -69,7 +69,7 @@ public class ObjectRedactor : MonoBehaviour
     {
         if (_object != null)
         {
-            // Ускоряем масштабирование с использованием множителя
+
             float scale = value * scaleMultiplier;
             _object.transform.localScale = new Vector3(scale, scale, scale);
         }

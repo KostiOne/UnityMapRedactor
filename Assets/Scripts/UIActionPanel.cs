@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class UIActionPanel : MonoBehaviour
 {
-    [SerializeField] private string prefabFolderPath = "ActionPrefabs"; // Путь к папке в Resources
-    [SerializeField] private Transform buttonContainer; // Контейнер для кнопок
-    [SerializeField] private GameObject buttonPrefab; // Префаб кнопки
+    [SerializeField] private string prefabFolderPath = "ActionPrefabs";
+    [SerializeField] private Transform buttonContainer;
+    [SerializeField] private GameObject buttonPrefab;
 
-    private PrefabInstanciate prefabInstanciate; // Ссылка на PrefabInstanciate
+    private PrefabInstanciate prefabInstanciate; 
 
     private void Start()
     {

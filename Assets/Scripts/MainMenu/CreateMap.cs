@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class CreateMap : MonoBehaviour
 {
-    [SerializeField] private TMP_InputField inputField; // Поле для ввода названия карты
-    [SerializeField] private string editorSceneName = "Editor"; // Название сцены-редактора
+    [SerializeField] private TMP_InputField inputField;
+    [SerializeField] private string editorSceneName = "Editor"; 
 
     private void Start()
     {
-        // Убедимся, что у нас есть название сцены-редактора
+     
         if (string.IsNullOrEmpty(editorSceneName))
         {
             Debug.LogError("Editor scene name is not set!");
@@ -27,7 +27,7 @@ public class CreateMap : MonoBehaviour
             return;
         }
 
-        // Создаём путь для сохранения файла карты
+ 
         string filePath = Path.Combine(Application.persistentDataPath, mapName + ".json");
 
         if (File.Exists(filePath))
@@ -36,14 +36,13 @@ public class CreateMap : MonoBehaviour
             return;
         }
 
-        // Создаём базовые данные карты
+    
         LevelData newLevel = new LevelData
         {
             levelName = mapName,
             objectDataList = new System.Collections.Generic.List<ObjectData>()
         };
 
-        // Сериализуем данные карты в JSON
         string json = JsonUtility.ToJson(newLevel, true);
         try
         {
@@ -56,11 +55,9 @@ public class CreateMap : MonoBehaviour
             return;
         }
 
-        // Сохраняем имя карты для сцены-редактора
         PlayerPrefs.SetString("CurrentMap", mapName);
         PlayerPrefs.Save();
 
-        // Загружаем сцену-редактор
         SceneManager.LoadScene(editorSceneName);
     }
 }
